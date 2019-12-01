@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public UnityEngine.Transform camera;
+    public UnityEngine.Transform camera,cameraTarget;
     public float walkSpeed = 1.0f;
     public float weight = 0.01f;
     public float terminalVelocity = 20.0f; 
@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Move(){
-        Vector3 front = transform.position- camera.position;
+        Vector3 front = cameraTarget.position- camera.position;
         front.y = 0;
         front.Normalize();
         Vector3 right = Quaternion.Euler(0, 90, 0)*front;
@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     void Jump(){
-        Vector3 front = transform.position- camera.position;
+        Vector3 front = cameraTarget.position- camera.position;
         front.Normalize();
         curVelocity = front*charge*jumpSpeed;
         jumped =true;
