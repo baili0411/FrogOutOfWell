@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 1158406567766078815}
   - component: {fileID: 1158406567766078814}
   - component: {fileID: 1158406567766078813}
-  - component: {fileID: 1158406567766078812}
-  - component: {fileID: 7664604294996823302}
   - component: {fileID: 5725151240167229192}
   - component: {fileID: 3243660780232394238}
+  - component: {fileID: 2387678314199466702}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -30,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1158406567766078803}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.77, z: 2.88}
+  m_LocalPosition: {x: 0, y: -0.049, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 8708079013232908011}
@@ -83,37 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &1158406567766078812
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158406567766078803}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!143 &7664604294996823302
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158406567766078803}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5725151240167229192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75cb9a4beaa40de45a6748fecfb13c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 8708079013232908011}
   walkSpeed: 5
+  weight: 10
+  terminalVelocity: 20
 --- !u!114 &3243660780232394238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +203,25 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 8694891126615864537}
+--- !u!143 &2387678314199466702
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158406567766078803}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 0.35
+  m_Radius: 0.35
+  m_SlopeLimit: 45
+  m_StepOffset: 0
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.0001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4327087010739397833
 GameObject:
   m_ObjectHideFlags: 0
