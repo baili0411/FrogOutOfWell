@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        Quaternion rotation = Quaternion.Euler (mLook.y, mLook.x, 0);
+        Quaternion rotation = Quaternion.Euler (0, 0, mLook.y);
         offset = rotation*offset;
         transform.position = player.position + offset;
         transform.LookAt(player.position);

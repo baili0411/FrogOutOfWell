@@ -23,7 +23,7 @@
                 },
                 {
                     "name": "Fire",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "621e207e-7504-4891-a257-4f851ab5025c",
                     "expectedControlType": "Button",
                     "processors": "",
