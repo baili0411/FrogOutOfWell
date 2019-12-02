@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     bool pressed = false;
     bool charging =false;
     bool jumped = false;
+    bool onWall = false;
     // Start is called before the first frame update
 
     void Start()
@@ -62,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 movement = front*mMove.y+right*mMove.x;
         movement.Normalize();
         CharacterController controller = GetComponent<CharacterController>();
-        if(!controller.isGrounded){
+        if(!controller.isGrounded&&!onWall){
             curVelocity.y =curVelocity.y - weight*(9.8f)*Time.deltaTime;
             //Debug.Log(curVelocity.y);
             movement = Vector3.zero;
@@ -75,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
                 jumped = false;
             }
         }
-        if(charging){
+        if(charging||onWall){
             movement = Vector3.zero;
         }
         controller.Move(walkSpeed*movement*Time.deltaTime+curVelocity*Time.deltaTime);
@@ -87,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         CharacterController controller = GetComponent<CharacterController>();
        //Debug.Log(pressed);
         if(pressed){
-            if(controller.isGrounded)
+            if(controller.isGrounded||onWall)
                 charging = true;
         }
         else {
@@ -110,6 +111,15 @@ public class PlayerMovement : MonoBehaviour
         front.Normalize();
         curVelocity = front*charge*jumpSpeed;
         jumped =true;
+        onWall = false;
+    }
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        CharacterController controller = GetComponent<CharacterController>();
+        if (controller.collisionFlags == CollisionFlags.Sides)
+        {
+            onWall=true;
+        }
     }
 
 }
