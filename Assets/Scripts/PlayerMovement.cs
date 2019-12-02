@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         movement.Normalize();
         CharacterController controller = GetComponent<CharacterController>();
         if(!controller.isGrounded){
-            curVelocity.y = Mathf.Clamp(curVelocity.y - weight*(0.98f)*Time.deltaTime,-terminalVelocity,terminalVelocity);
+            curVelocity.y =curVelocity.y - weight*(9.8f)*Time.deltaTime;
             //Debug.Log(curVelocity.y);
             movement = Vector3.zero;
         }
