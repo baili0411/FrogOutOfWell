@@ -100,7 +100,7 @@ MonoBehaviour:
   camera: {fileID: 8708079013232908011}
   cameraTarget: {fileID: 1919104862953497043}
   walkSpeed: 5
-  weight: 10
+  weight: 1
   terminalVelocity: 20
   charge: 0.5
   chargespeed: 0.67
