@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public UnityEngine.Transform camera;
+    public UnityEngine.Transform camera,cameraTarget;
     public float walkSpeed = 1.0f;
     public float weight = 0.01f;
     public float terminalVelocity = 20.0f; 
@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     bool pressed = false;
     bool charging =false;
     bool jumped = false;
+    bool onWall = false;
     // Start is called before the first frame update
 
     void Start()
@@ -55,15 +56,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Move(){
-        Vector3 front = transform.position- camera.position;
+        Vector3 front = cameraTarget.position- camera.position;
         front.y = 0;
         front.Normalize();
         Vector3 right = Quaternion.Euler(0, 90, 0)*front;
         Vector3 movement = front*mMove.y+right*mMove.x;
         movement.Normalize();
         CharacterController controller = GetComponent<CharacterController>();
-        if(!controller.isGrounded){
-            curVelocity.y = Mathf.Clamp(curVelocity.y - weight*(0.98f)*Time.deltaTime,-terminalVelocity,terminalVelocity);
+        if(!controller.isGrounded&&!onWall){
+            curVelocity.y =curVelocity.y - weight*(9.8f)*Time.deltaTime;
             //Debug.Log(curVelocity.y);
             movement = Vector3.zero;
         }
@@ -75,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
                 jumped = false;
             }
         }
-        if(charging){
+        if(charging||onWall){
             movement = Vector3.zero;
         }
         controller.Move(walkSpeed*movement*Time.deltaTime+curVelocity*Time.deltaTime);
@@ -87,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         CharacterController controller = GetComponent<CharacterController>();
        //Debug.Log(pressed);
         if(pressed){
-            if(controller.isGrounded)
+            if(controller.isGrounded||onWall)
                 charging = true;
         }
         else {
@@ -106,10 +107,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     void Jump(){
-        Vector3 front = transform.position- camera.position;
+        Vector3 front = cameraTarget.position- camera.position;
         front.Normalize();
         curVelocity = front*charge*jumpSpeed;
         jumped =true;
+        onWall = false;
+    }
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        CharacterController controller = GetComponent<CharacterController>();
+        if (controller.collisionFlags == CollisionFlags.Sides)
+        {
+            onWall=true;
+        }
     }
 
 }
