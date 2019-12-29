@@ -55,8 +55,9 @@ MonoBehaviour:
   weight: 1
   terminalVelocity: 100
   charge: 0.5
-  chargespeed: 0.67
+  chargespeed: 2
   jumpSpeed: 30
+  frog: {fileID: 6057715517992668682}
 --- !u!114 &3243660780232394238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,13 +186,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 0.5
-  m_Radius: 0.5
+  m_Height: 0.25
+  m_Radius: 0.1
   m_SlopeLimit: 45
   m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.0001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.65, z: 0}
 --- !u!1 &1959888233891172870
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,7 +578,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8008943163570893125}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.53, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1158406567766078815}
@@ -593,6 +594,14 @@ PrefabInstance:
     - target: {fileID: 1644373995442134, guid: 0187bdd962557471faee34c9b592135c, type: 3}
       propertyPath: m_Name
       value: ToxicFrog
+      objectReference: {fileID: 0}
+    - target: {fileID: 4504873738087994, guid: 0187bdd962557471faee34c9b592135c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.19454193
+      objectReference: {fileID: 0}
+    - target: {fileID: 4504873738087994, guid: 0187bdd962557471faee34c9b592135c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9808895
       objectReference: {fileID: 0}
     - target: {fileID: 4691832418928178, guid: 0187bdd962557471faee34c9b592135c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -650,13 +659,33 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4718276142896762, guid: 0187bdd962557471faee34c9b592135c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5170221
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718276142896762, guid: 0187bdd962557471faee34c9b592135c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.27276856
+      objectReference: {fileID: 0}
+    - target: {fileID: 95172607052263456, guid: 0187bdd962557471faee34c9b592135c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6c9a927ec10d14ce9be8d0562e39e1c2, type: 2}
     - target: {fileID: 136685980256629510, guid: 0187bdd962557471faee34c9b592135c,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 136685980256629510, guid: 0187bdd962557471faee34c9b592135c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0187bdd962557471faee34c9b592135c, type: 3}
+--- !u!1 &6057715517992668682 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1644373995442134, guid: 0187bdd962557471faee34c9b592135c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6058612154279608796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6054008423184222190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4691832418928178, guid: 0187bdd962557471faee34c9b592135c,

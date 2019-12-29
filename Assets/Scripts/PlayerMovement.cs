@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float charge = 0.0f;
     public float chargespeed =0.67f;
     public float jumpSpeed = 3.0f;
+    public GameObject frog;
     Vector2 mMove;
     Rigidbody rb;
     Vector3 curVelocity;
@@ -21,12 +22,13 @@ public class PlayerMovement : MonoBehaviour
     bool jumped = false;
     bool onWall = false;
     // Start is called before the first frame update
-
+    Animator animator;
     void Start()
     {
         pressed = false;
         curVelocity = Vector3.zero;
         charge = 0.0f;
+        animator = frog.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -70,8 +72,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else {
             //Debug.Log("Ground!");
-            if(!jumped)
+            if(!jumped){
             curVelocity = Vector3.zero;
+            //animator.SetTrigger("Land");
+            }
             else {
                 jumped = false;
             }
@@ -79,7 +83,16 @@ public class PlayerMovement : MonoBehaviour
         if(charging||onWall){
             movement = Vector3.zero;
         }
+        if(controller.isGrounded||onWall){
+            animator.SetBool("Land",true);
+        }
+        if(movement == Vector3.zero&&(controller.isGrounded||onWall)){
+            animator.SetTrigger("Idle");
+        }
         controller.Move(walkSpeed*movement*Time.deltaTime+curVelocity*Time.deltaTime);
+        if(movement != Vector3.zero){
+            animator.SetTrigger("Crawl");
+        }
         if(movement!=Vector3.zero){
             transform.LookAt(transform.position+movement);
         }
@@ -112,14 +125,19 @@ public class PlayerMovement : MonoBehaviour
         curVelocity = front*charge*jumpSpeed;
         jumped =true;
         onWall = false;
+        Vector3 temp = curVelocity;
+        temp.y = 0;
+        transform.LookAt(transform.position+temp*10);
+        animator.SetBool("Land",false);
+        animator.SetTrigger("Jump");
     }
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         CharacterController controller = GetComponent<CharacterController>();
         if (controller.collisionFlags == CollisionFlags.Sides)
         {
+            //animator.SetTrigger("Land");
             onWall=true;
         }
     }
-
 }
