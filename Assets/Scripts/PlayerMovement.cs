@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-         Cursor.lockState = CursorLockMode.Locked;   // keep confined to center of screen
         pressed = false;
         curVelocity = Vector3.zero;
         charge = 0.0f;
@@ -80,11 +79,9 @@ public class PlayerMovement : MonoBehaviour
         if(charging||onWall){
             movement = Vector3.zero;
         }
-        Vector3  finalmove = walkSpeed*movement*Time.deltaTime+curVelocity*Time.deltaTime;
-        controller.Move(finalmove);
-        if(finalmove!=Vector3.zero){
-            finalmove.y = 0;
-            transform.LookAt(transform.position+finalmove);
+        controller.Move(walkSpeed*movement*Time.deltaTime+curVelocity*Time.deltaTime);
+        if(movement!=Vector3.zero){
+            transform.LookAt(transform.position+movement);
         }
     }
     void Charge(){
